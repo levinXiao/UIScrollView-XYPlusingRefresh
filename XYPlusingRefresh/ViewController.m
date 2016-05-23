@@ -33,7 +33,6 @@
     [autoRefreshButton addTarget:self action:@selector(autoRefreshButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:autoRefreshButton];
     
-    
     table = [[UITableView alloc] initWithFrame:(CGRect){0,120,self.view.bounds.size.width,self.view.bounds.size.height-240} style:UITableViewStylePlain];
     [self.view addSubview:table];
     
@@ -43,9 +42,11 @@
     tableCount = 40;
     
     [table initDownRefreshCompletion:^(id refreshView) {
-        tableCount = 40;
-        [table reloadData];
-        [refreshView endDownRefresh];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            tableCount = 40;
+            [table reloadData];
+            [refreshView endDownRefresh];
+        });
     }];
     
     [table initPullUpRefreshCompletion:^(id refreshView) {

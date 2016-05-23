@@ -696,7 +696,7 @@ static float autoTrigglePullUpHeight_Default = 150;
             return;
         }
         CGFloat moveCompareOffsetY = point.y + self.bounds.size.height - self.contentSize.height;
-        NSLog(@"pointY:%f moveCompareOffsetY %f",point.y,moveCompareOffsetY);
+        //        NSLog(@"pointY:%f moveCompareOffsetY %f",point.y,moveCompareOffsetY);
         if (moveCompareOffsetY < -(self.autoTrigglePullUpHeight == 0 ? autoTrigglePullUpHeight_Default : self.autoTrigglePullUpHeight)) {
             [self backToNormalPullUpState];
             return;
