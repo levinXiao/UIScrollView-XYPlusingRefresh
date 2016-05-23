@@ -5,9 +5,9 @@
 
 ###show
 
-![下拉刷新 downrefresh](https://github.com/levinXiao/UIScrollView-XYPlusingRefresh/tree/master/downrefresh.png)
+![下拉刷新 downrefresh](https://github.com/levinXiao/UIScrollView-XYPlusingRefresh/blob/master/downrefresh.png)
 
-![上拉刷新 downrefresh](https://github.com/levinXiao/UIScrollView-XYPlusingRefresh/tree/master/pullrefresh.png)
+![上拉刷新 downrefresh](https://github.com/levinXiao/UIScrollView-XYPlusingRefresh/blob/master/pullrefresh.png)
 ###自动刷新 autorefresh
 ```
 //自动刷新的前提是已经添加了下拉刷新 如果在之前没有调用
