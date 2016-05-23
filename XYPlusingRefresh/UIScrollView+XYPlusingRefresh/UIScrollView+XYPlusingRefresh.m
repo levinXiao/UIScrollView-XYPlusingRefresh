@@ -423,9 +423,22 @@ static float autoTrigglePullUpHeight_Default = 150;
             refreshViewHeight_down
         };
     }];
-    for (CALayer *layer in self.pulsingView_down.layer.sublayers) {
-        [layer XYPlusingRefresh_reset];
-        [layer XYPlusingRefresh_resume];
+    
+    for (int i = 0; i < self.pulsingView_down.layer.sublayers.count; i ++) {
+        CALayer *layer = self.pulsingView_down.layer.sublayers[i];
+        CAAnimation *animation = [layer animationForKey:@"UIScrollView_XYPlusingRefresh_down_layer_pulsing"];
+        if (!animation) {
+            CAAnimationGroup *group = [self downRefreshingBaseAnimationWithBetweenOffset:i*0.7];
+            [layer addAnimation:group forKey:@"UIScrollView_XYPlusingRefresh_down_layer_pulsing"];
+            group.delegate = self;
+            
+            [group setValue:@"pulsingLayerGroupAnimation" forKey:@"UIScrollView_DownRefresh_XYPlusingRefresh_ValueKey"];
+            
+            [layer XYPlusingRefresh_resume];
+        }else{
+            [layer XYPlusingRefresh_reset];
+            [layer XYPlusingRefresh_resume];
+        }
     }
     
     [self downRefreshing];
@@ -598,9 +611,25 @@ static float autoTrigglePullUpHeight_Default = 150;
         if (downanimKey && [downanimKey isKindOfClass:[NSString class]]) {
             if ([downanimKey isEqualToString:@"prepareScaleAnimation"]) {
                 self.prepareToRefresh_down = YES;
-                for (CALayer *layer in self.pulsingView_down.layer.sublayers) {
-                    [layer XYPlusingRefresh_reset];
-                    [layer XYPlusingRefresh_resume];
+                int count = (int)self.pulsingView_down.layer.sublayers.count;
+                if (count == 0) {
+                    [self initDownPulsingLayer];
+                }
+                for (int i = 0; i < count; i ++) {
+                    CALayer *layer = self.pulsingView_down.layer.sublayers[i];
+                    CAAnimation *animation = [layer animationForKey:@"UIScrollView_XYPlusingRefresh_down_layer_pulsing"];
+                    if (!animation) {
+                        CAAnimationGroup *group = [self downRefreshingBaseAnimationWithBetweenOffset:i*0.7];
+                        [layer addAnimation:group forKey:@"UIScrollView_XYPlusingRefresh_down_layer_pulsing"];
+                        group.delegate = self;
+                        
+                        [group setValue:@"pulsingLayerGroupAnimation" forKey:@"UIScrollView_DownRefresh_XYPlusingRefresh_ValueKey"];
+                        
+                        [layer XYPlusingRefresh_resume];
+                    }else{
+                        [layer XYPlusingRefresh_reset];
+                        [layer XYPlusingRefresh_resume];
+                    }
                 }
             }else if ([downanimKey isEqualToString:@"pulsingLayerGroupAnimation"]){
                 NSLog(@"finish");
