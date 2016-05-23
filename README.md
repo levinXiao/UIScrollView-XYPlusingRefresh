@@ -3,7 +3,20 @@
 
 采用全新的类别扩展方法 使用简单
 
-###添加下拉刷新
+###show
+
+![下拉刷新 downrefresh](https://github.com/levinXiao/UIScrollView-XYPlusingRefresh/tree/master/downrefresh.png)
+
+![上拉刷新 downrefresh](https://github.com/levinXiao/UIScrollView-XYPlusingRefresh/tree/master/pullrefresh.png)
+###自动刷新 autorefresh
+```
+//自动刷新的前提是已经添加了下拉刷新 如果在之前没有调用
+//[table initPullUpRefresh] 或者 [table initPullUpRefreshCompletion] 方法 则需要添加一下
+[table autoRefresh];
+
+```
+
+###添加下拉刷新 downrefresh
 
 ```
   [table initDownRefreshCompletion:^(id refreshView) {
@@ -13,7 +26,7 @@
   }];
 ```
 
-###添加上拉刷新
+###添加上拉刷新 pullrefresh
 
 ```
   [table initPullUpRefreshCompletion:^(id refreshView) {
